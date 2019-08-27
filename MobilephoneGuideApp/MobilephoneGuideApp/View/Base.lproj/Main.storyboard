@@ -33,7 +33,11 @@
                                                 <segment title="Faverite"/>
                                             </segments>
                                         </segmentedControl>
-                                        <barButtonItem key="rightBarButtonItem" title="Sort" id="U5c-N1-fxX"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Sort" id="U5c-N1-fxX">
+                                            <connections>
+                                                <action selector="chickToSortWithSender:" destination="BYZ-38-t0r" id="AZH-9r-2ex"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -156,6 +160,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="mSorting" destination="U5c-N1-fxX" id="YGH-Lg-UR8"/>
                         <outlet property="mTableView" destination="Yka-2n-gXl" id="weU-e4-ps4"/>
                     </connections>
                 </viewController>

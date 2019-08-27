@@ -17,12 +17,12 @@ struct PurpleMobilephoneListModel: Codable {
     let price: Double
     let brand, name, description: String
     
-    let favButtonPressed: Bool
+   
 }
 
 // MARK: Convenience initializers
 
-/*extension PurpleMobilephoneListModel {
+extension PurpleMobilephoneListModel {
     init?(data: Data) {
         guard let me = try? JSONDecoder().decode(PurpleMobilephoneListModel.self, from: data) else { return nil }
         self = me
@@ -47,9 +47,9 @@ struct PurpleMobilephoneListModel: Codable {
         guard let data = self.jsonData else { return nil }
         return String(data: data, encoding: .utf8)
     }
-}*/
+}
 
-/*extension Array where Element == MobilephoneListModel.Element {
+extension Array where Element == MobilephoneListModel.Element {
     init?(data: Data) {
         guard let me = try? JSONDecoder().decode(MobilephoneListModel.self, from: data) else { return nil }
         self = me
@@ -74,4 +74,4 @@ struct PurpleMobilephoneListModel: Codable {
         guard let data = self.jsonData else { return nil }
         return String(data: data, encoding: .utf8)
     }
-}*/
+}

@@ -11,6 +11,8 @@ import Alamofire
 import AlamofireImage
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var mSorting: UIBarButtonItem!
   
     var mDataArray: [PurpleMobilephoneListModel] = []
     @IBOutlet weak var  mTableView: UITableView!
@@ -60,6 +62,60 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
+    
+    @IBAction func chickToSort(sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Sorting", message: "", preferredStyle: .alert)
+        
+        //price low to hight
+        alert.addAction(UIAlertAction(title: "Price low to hight", style: .default, handler: { _ in
+            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+                //asc
+                first.price < second.price
+            }
+            self.mTableView.reloadData()
+        }))
+        
+        //price high to low
+        alert.addAction(UIAlertAction(title: "Price hight to low", style: .default, handler: { _ in
+            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+                //desc
+                first.price > second.price
+            }
+            self.mTableView.reloadData()
+        }))
+        
+        //rating low to hight
+        alert.addAction(UIAlertAction(title: "Rating low to hight", style: .default, handler: { _ in
+            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+                //desc
+                first.rating < second.rating
+            }
+            self.mTableView.reloadData()
+        }))
+        
+        //rating
+        alert.addAction(UIAlertAction(title: "Rating hight to low", style: .default, handler: { _ in
+            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+                //desc
+                first.rating > second.rating
+            }
+            self.mTableView.reloadData()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+
+     
+        
+        print("clicked!")
+    }
+    
+   
+    
+    
+    
+    
     
     
 
