@@ -29,9 +29,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "tabAllCell") as? TabAllTableViewCell
         let item = mDataArray[indexPath.row]
         cell?.mMobileName.text = item.name
-        cell?.mMobilePrice.text = String(item.price)
+        cell?.mMobilePrice.text = "Price: $\(String(item.price))"
         cell?.mMobileDescription.text = item.description
-        cell?.mMobileRating.text = String(item.rating)
+        cell?.mMobileRating.text = "Rating: \(String(item.rating))"
+        cell?.mImageView.loadImage(url: item.thumbImageURL)
         
 
         
