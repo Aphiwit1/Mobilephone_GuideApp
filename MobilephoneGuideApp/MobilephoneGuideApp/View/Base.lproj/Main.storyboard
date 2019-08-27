@@ -55,10 +55,14 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jhJ-n9-7R6">
                                                             <rect key="frame" x="105" y="0.0" width="309" height="167.5"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDo-he-BeZ">
-                                                                    <rect key="frame" x="262" y="4" width="39" height="30"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDo-he-BeZ">
+                                                                    <rect key="frame" x="270" y="7" width="24" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <state key="normal" title="Heart"/>
+                                                                    <state key="normal" image="starDefault.png"/>
+                                                                    <state key="selected" image="starSelected.png"/>
+                                                                    <connections>
+                                                                        <action selector="chackFavButtonPressedWithSender:" destination="leM-Re-WQ0" eventType="touchUpInside" id="IG4-OO-KSf"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JBl-Vq-xqJ">
                                                                     <rect key="frame" x="8" y="8" width="239" height="21"/>
@@ -131,6 +135,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="mFavBtn" destination="zDo-he-BeZ" id="x1x-aG-4Gt"/>
                                             <outlet property="mImageView" destination="Ctk-yf-XXx" id="rM9-G4-pNs"/>
                                             <outlet property="mMobileDescription" destination="dXN-7Q-3qT" id="Ad2-3r-N2g"/>
                                             <outlet property="mMobileName" destination="JBl-Vq-xqJ" id="pwZ-8e-Y4s"/>
@@ -159,4 +164,8 @@
             <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="starDefault.png" width="24" height="24"/>
+        <image name="starSelected.png" width="24" height="24"/>
+    </resources>
 </document>

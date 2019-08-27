@@ -16,6 +16,8 @@ struct PurpleMobilephoneListModel: Codable {
     let thumbImageURL: String
     let price: Double
     let brand, name, description: String
+    
+    let favButtonPressed: Bool
 }
 
 // MARK: Convenience initializers

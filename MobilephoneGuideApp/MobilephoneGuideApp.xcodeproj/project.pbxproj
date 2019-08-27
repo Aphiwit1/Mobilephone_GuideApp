@@ -20,6 +20,8 @@
 		CBFC2078231515B20039000A /* TabAllTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC2077231515B20039000A /* TabAllTableViewCell.swift */; };
 		CBFC207B23151D2A0039000A /* MobilephoneListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC207A23151D2A0039000A /* MobilephoneListModel.swift */; };
 		CBFC207D23152C740039000A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC207C23152C740039000A /* Extension.swift */; };
+		CBFC207F231530FB0039000A /* starDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC207E231530FB0039000A /* starDefault.png */; };
+		CBFC20812315310A0039000A /* starSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC20802315310A0039000A /* starSelected.png */; };
 		FEFFCCC45DC154786F8101CD /* Pods_MobilephoneGuideAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB1272678A164C30C25E6691 /* Pods_MobilephoneGuideAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +65,8 @@
 		CBFC2077231515B20039000A /* TabAllTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabAllTableViewCell.swift; sourceTree = "<group>"; };
 		CBFC207A23151D2A0039000A /* MobilephoneListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobilephoneListModel.swift; sourceTree = "<group>"; };
 		CBFC207C23152C740039000A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		CBFC207E231530FB0039000A /* starDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starDefault.png; sourceTree = "<group>"; };
+		CBFC20802315310A0039000A /* starSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starSelected.png; sourceTree = "<group>"; };
 		D9AE834FC612D78D0BFC2D04 /* Pods_MobilephoneGuideAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobilephoneGuideAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1272678A164C30C25E6691 /* Pods_MobilephoneGuideAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobilephoneGuideAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAF99F5BC57F9260D38CDA8 /* Pods-MobilephoneGuideApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobilephoneGuideApp.release.xcconfig"; path = "Target Support Files/Pods-MobilephoneGuideApp/Pods-MobilephoneGuideApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +209,8 @@
 		CBFC20792315196A0039000A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				CBFC20802315310A0039000A /* starSelected.png */,
+				CBFC207E231530FB0039000A /* starDefault.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -318,7 +324,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF298FF231509570046FDE0 /* LaunchScreen.storyboard in Resources */,
+				CBFC20812315310A0039000A /* starSelected.png in Resources */,
 				CBF298FC231509570046FDE0 /* Assets.xcassets in Resources */,
+				CBFC207F231530FB0039000A /* starDefault.png in Resources */,
 				CBF298F7231509560046FDE0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
