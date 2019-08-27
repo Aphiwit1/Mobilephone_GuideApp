@@ -7,23 +7,58 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
   
+    var mDataArray: [PurpleMobilephoneListModel] = []
+    @IBOutlet weak var  mTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        feedData()
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return mDataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tabAllCell") as? TabAllTableViewCell
+        let item = mDataArray[indexPath.row]
+        cell?.mMobileName.text = item.name
+        cell?.mMobilePrice.text = String(item.price)
+        cell?.mMobileDescription.text = item.description
+        cell?.mMobileRating.text = String(item.rating)
+        
+
         
         return cell!
+    }
+    
+    
+    
+    func feedData() {
+        let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles"
+        AF.request(baseUrl).response { (response) in
+            print("----------> ", response)
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode([PurpleMobilephoneListModel].self, from: response.data!)
+                print("Result ----> ", result)
+                
+                for item in result {
+                    print("item, --------------> ", item)
+                }
+               self.mDataArray += result
+               self.mTableView.reloadData()
+            }catch {
+                print("---error --->", error.localizedDescription)
+            }
+        }
+        
     }
 
 

@@ -9,6 +9,14 @@
 import UIKit
 
 class TabAllTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var mImageView: UIImageView!
+    @IBOutlet weak var mMobileName: UILabel!
+    @IBOutlet weak var mMobileDescription: UILabel!
+    @IBOutlet weak var mMobilePrice: UILabel!
+    @IBOutlet weak var mMobileRating: UILabel!
+    
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
