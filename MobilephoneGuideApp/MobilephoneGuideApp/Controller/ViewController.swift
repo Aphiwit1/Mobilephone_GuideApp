@@ -180,9 +180,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func btnAll(sender: UIButton) {
         print("btnAll")
         
-        let all = mDataArrayForFavorite
-        print(all)
-        mDataArray = all
+        mDataArray = mDataArrayForFavorite
        
     }
     
@@ -190,8 +188,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("btnFav")
     
         let favourites = mDataArray.filter { $0.favSelected ?? false }
-        print()
+        print(favourites)
         mDataArray = favourites
+        
+        
     }
     
     
