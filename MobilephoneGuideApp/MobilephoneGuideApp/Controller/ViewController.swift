@@ -52,6 +52,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // get images urls and gi
+        
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
         let item = mDataArray[indexPath.row]
         vc2?.title = item.name
@@ -59,10 +62,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         vc2?.vc2PriceLabel = "Rating : \(String(item.price))"
         vc2?.vc2RatingLabel = "Price: \(String(item.rating))"
         
-//        vc2?.mDetailRating.text = "Rating: \(String(item.rating))"
-//        vc2?.mDetailDescription.text = item.description
-        
-        print("Hello")
+        vc2?.vc2imageURLS = mobile_image
         
         self.navigationController?.pushViewController(vc2!, animated: true)
     }
@@ -98,9 +98,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                             }
                              //end for loop
                         })
+                   
                 }
                 
                 self.mDataArray += result
+                 print("---mobile detail list id ", self.mobile_image)
                
                 
             }catch {

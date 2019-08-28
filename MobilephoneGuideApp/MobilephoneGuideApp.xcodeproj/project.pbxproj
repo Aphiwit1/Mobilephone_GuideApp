@@ -26,6 +26,7 @@
 		CBFC20852315F5700039000A /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CBFC20842315F5700039000A /* back-arrow.png */; };
 		CBFC2087231619D00039000A /* DetailMobileListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC2086231619D00039000A /* DetailMobileListModel.swift */; };
 		CBFC208923161CEB0039000A /* FeedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC208823161CEB0039000A /* FeedData.swift */; };
+		CBFC208B231630F00039000A /* CardDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFC208A231630F00039000A /* CardDetailCollectionViewCell.swift */; };
 		FEFFCCC45DC154786F8101CD /* Pods_MobilephoneGuideAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB1272678A164C30C25E6691 /* Pods_MobilephoneGuideAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		CBFC20842315F5700039000A /* back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow.png"; sourceTree = "<group>"; };
 		CBFC2086231619D00039000A /* DetailMobileListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMobileListModel.swift; sourceTree = "<group>"; };
 		CBFC208823161CEB0039000A /* FeedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedData.swift; sourceTree = "<group>"; };
+		CBFC208A231630F00039000A /* CardDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		D9AE834FC612D78D0BFC2D04 /* Pods_MobilephoneGuideAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobilephoneGuideAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1272678A164C30C25E6691 /* Pods_MobilephoneGuideAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MobilephoneGuideAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAAF99F5BC57F9260D38CDA8 /* Pods-MobilephoneGuideApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobilephoneGuideApp.release.xcconfig"; path = "Target Support Files/Pods-MobilephoneGuideApp/Pods-MobilephoneGuideApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				CBF298F3231509560046FDE0 /* ViewController.swift */,
 				CBFC2077231515B20039000A /* TabAllTableViewCell.swift */,
 				CBFC20822315F47D0039000A /* CardDetailViewController.swift */,
+				CBFC208A231630F00039000A /* CardDetailCollectionViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				CBF298F2231509560046FDE0 /* AppDelegate.swift in Sources */,
 				CBFC207D23152C740039000A /* Extension.swift in Sources */,
 				CBFC207B23151D2A0039000A /* MobilephoneListModel.swift in Sources */,
+				CBFC208B231630F00039000A /* CardDetailCollectionViewCell.swift in Sources */,
 				CBFC2078231515B20039000A /* TabAllTableViewCell.swift in Sources */,
 				CBFC208923161CEB0039000A /* FeedData.swift in Sources */,
 				CBFC2087231619D00039000A /* DetailMobileListModel.swift in Sources */,
