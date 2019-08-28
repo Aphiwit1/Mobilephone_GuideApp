@@ -10,7 +10,10 @@ import UIKit
 
 class TabAllTableViewCell: UITableViewCell {
     
+    var mData: PurpleMobilephoneListModel!
+    
     @IBOutlet weak var mImageView: UIImageView!
+    
     
     
     @IBOutlet weak var mMobileName: UILabel!
@@ -18,6 +21,8 @@ class TabAllTableViewCell: UITableViewCell {
     @IBOutlet weak var mMobilePrice: UILabel!
     @IBOutlet weak var mMobileRating: UILabel!
     @IBOutlet weak var mFavBtn: UIButton!
+    
+    
    
 
 
@@ -34,20 +39,13 @@ class TabAllTableViewCell: UITableViewCell {
     
     @IBAction func chackFavButtonPressed(sender: UIButton) {
         mFavBtn.isSelected = !sender.isSelected
-//        if mFavBtn.isSelected {
-////            mFavBtn.setImage(UIImage(named: "starSelected"), for: .selected)
-//            mFavBtn.isSelected = sender.isSelected
-//        }else {
-////            mFavBtn.setImage(UIImage(named: "starDefault"), for: .normal)
-//            mFavBtn.isSelected = true
-//        }
-        
-//        if sender.isSelected == true {
-//             sender.setImage(UIImage(named: "starSelected"), for: .normal)
-//        }else {
-//             sender.setImage(UIImage(named: "starDefault"), for: .normal)
-//        }
-        
+//        print(m)
+        if mFavBtn.isSelected == true {
+            mData.favSelected = true
+            print(mData.favSelected)
+        }else {
+           
+        }
         
     }
 

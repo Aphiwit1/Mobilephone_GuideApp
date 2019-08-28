@@ -10,14 +10,14 @@ import Foundation
 
 typealias MobilephoneListModel = [PurpleMobilephoneListModel]
 
-struct PurpleMobilephoneListModel: Codable {
+class  PurpleMobilephoneListModel: Codable {
     let rating: Double
     let id: Int
     let thumbImageURL: String
     let price: Double
     let brand, name, description: String
     
-    let favSelected: Bool? = false
+    var favSelected: Bool? = false
 }
 
 // MARK: Convenience initializers

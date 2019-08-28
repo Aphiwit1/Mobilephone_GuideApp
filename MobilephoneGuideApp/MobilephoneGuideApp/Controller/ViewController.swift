@@ -13,6 +13,10 @@ import AlamofireImage
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mSorting: UIBarButtonItem!
+    
+    @IBOutlet weak var mAllBtn: UIButton!
+    @IBOutlet weak var mFavoriteBtn: UIButton!
+    
     var id : Int?
     var mobile_image:[String] = []
     var mobile_image_id:[Any] = []
@@ -22,11 +26,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    var mDataArrayForFavorite : [PurpleMobilephoneListModel] = []
+    
     @IBOutlet weak var  mTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        feedData()
+       feedData()
+        
+        
+     
+        
+
     }
     
     
@@ -43,16 +54,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell?.mMobileDescription.text = item.description
         cell?.mMobileRating.text = "Rating: \(String(item.rating))"
         cell?.mImageView.loadImage(url: item.thumbImageURL)
+        cell?.mData = item
         
-        print("fav Selected : --->", item.favSelected)
+
         return cell!
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        // get images urls and gi
-        
+
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
         let item = mDataArray[indexPath.row]
         vc2?.title = item.name
@@ -60,11 +70,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         vc2?.vc2PriceLabel = "Rating : \(String(item.price))"
         vc2?.vc2RatingLabel = "Price: \(String(item.rating))"
         vc2?.vc2ID = item.id
-        
-        
         vc2?.vc2imageURLS = mobile_image
         
         self.navigationController?.pushViewController(vc2!, animated: true)
+        
+
     }
     
     
@@ -102,7 +112,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                    
                 }
                 
+                
+                
                 self.mDataArray += result
+                self.mDataArrayForFavorite = self.mDataArray
+    
                  print("---mobile detail list id ", self.mobile_image)
                
                 
@@ -164,6 +178,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("clicked!")
     }
+    
+    @IBAction func btnAll(sender: UIButton) {
+        print("btnAll")
+        mAllBtn.isSelected == true
+        
+       
+    }
+    
+    @IBAction func btnFavortie(sender: UIButton) {
+        print("btnFav")
+        
+    
+        let favourites = mDataArray.filter { $0.favSelected ?? false }
+                
+        
+    }
+    
     
     
     
