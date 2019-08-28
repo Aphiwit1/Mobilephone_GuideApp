@@ -112,8 +112,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                    
                 }
                 
-                
-                
                 self.mDataArray += result
                 self.mDataArrayForFavorite = self.mDataArray
     
@@ -181,18 +179,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func btnAll(sender: UIButton) {
         print("btnAll")
-        mAllBtn.isSelected == true
         
+        let all = mDataArrayForFavorite
+        print(all)
+        mDataArray = all
        
     }
     
     @IBAction func btnFavortie(sender: UIButton) {
         print("btnFav")
-        
     
         let favourites = mDataArray.filter { $0.favSelected ?? false }
-                
-        
+        print()
+        mDataArray = favourites
     }
     
     
