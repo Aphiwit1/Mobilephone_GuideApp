@@ -13,7 +13,8 @@ import AlamofireImage
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mSorting: UIBarButtonItem!
-  
+     var mobile_image:[String] = []
+    
     var mDataArray: [PurpleMobilephoneListModel] = [] {
         didSet {
             mTableView.reloadData()
@@ -27,7 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         feedData()
     }
     
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mDataArray.count
@@ -43,17 +44,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell?.mImageView.loadImage(url: item.thumbImageURL)
         
         print("fav Selected : --->", item.favSelected)
-
+        
         return cell!
     }
     
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "cardDetailStoryboard") as? CardDetailViewController
-        let item = mDataArray[indexPath.row]
-        
-        
-        self.navigationController?.pushViewController(vc!, animated: true)
-    }*/
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
@@ -77,16 +71,47 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let result = try decoder.decode([PurpleMobilephoneListModel].self, from: response.data!)
                 print("Result ----> ", result)
                 
-                for item in result {
-                    print("item, --------------> ", item)
+                print("result data : ---> ", result)
+                
+                
+                
+                for items in result {
+                    let url_detail = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(items.id)/images/"
+                    print("url_detail--->", url_detail)
+                    
+                    /*var user = FeedData().getUser_JoinList_Data(url: user_url, completion: { (result) in
+                        print("-------> user joinlist<-------", result.data)
+
+                        self.user_joinlist.append(result.data)
+                        self.mTableView.reloadData()
+                        
+                    })*/
+                    
+                    var mobile_detail_image =
+                        FeedData().getDetail_mobileList(url: url_detail, completion: { (result) in
+                            print("mobile result --->", result)
+                            
+                            for mobile_detail_list in result {
+                                print("mobiledetail list id ", mobile_detail_list.url)
+                            }
+                        })
+                    
+ 
                 }
-               self.mDataArray += result
-//               self.mTableView.reloadData()
+                
+                
+                
+                self.mDataArray += result
+                
             }catch {
                 print("---error --->", error.localizedDescription)
             }
         }
     }
+    
+    
+    
+    
     
     @IBAction func chickToSort(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Sorting", message: "", preferredStyle: .alert)
@@ -130,23 +155,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
-
-     
+        
+        
         
         print("clicked!")
     }
     
     
-   
-    
-   
     
     
     
     
     
     
-
-
+    
+    
+    
+    
+    
 }
 
