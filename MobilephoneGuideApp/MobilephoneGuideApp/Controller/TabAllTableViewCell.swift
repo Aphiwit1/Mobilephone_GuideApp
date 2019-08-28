@@ -44,7 +44,7 @@ class TabAllTableViewCell: UITableViewCell {
             mData.favSelected = true
             print(mData.favSelected)
         }else {
-           
+            mData.favSelected = false
         }
         
     }

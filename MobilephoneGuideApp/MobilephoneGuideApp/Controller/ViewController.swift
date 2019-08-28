@@ -77,6 +77,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+           
+            
+        }
+    }
+    
     
     
 //    Start  feed data
