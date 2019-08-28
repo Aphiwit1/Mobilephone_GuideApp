@@ -13,7 +13,7 @@ import AlamofireImage
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mSorting: UIBarButtonItem!
-     var mobile_image:[String] = []
+    var mobile_image:[String] = []
     
     var mDataArray: [PurpleMobilephoneListModel] = [] {
         didSet {
@@ -45,6 +45,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("fav Selected : --->", item.favSelected)
         
+        
+        
         return cell!
     }
     
@@ -53,6 +55,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
         let item = mDataArray[indexPath.row]
         vc2?.title = item.name
+        vc2?.vc2DecriptionLabel = item.description
+        vc2?.vc2PriceLabel = "Rating : \(String(item.price))"
+        vc2?.vc2RatingLabel = "Price: \(String(item.rating))"
+        
+//        vc2?.mDetailRating.text = "Rating: \(String(item.rating))"
+//        vc2?.mDetailDescription.text = item.description
         
         print("Hello")
         
@@ -61,7 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    
+//    Start  feed data
     func feedData() {
         let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles"
         AF.request(baseUrl).response { (response) in
@@ -79,35 +87,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let url_detail = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(items.id)/images/"
                     print("url_detail--->", url_detail)
                     
-                    /*var user = FeedData().getUser_JoinList_Data(url: user_url, completion: { (result) in
-                        print("-------> user joinlist<-------", result.data)
-
-                        self.user_joinlist.append(result.data)
-                        self.mTableView.reloadData()
-                        
-                    })*/
-                    
-                    var mobile_detail_image =
+                    var mobile_detail_image_list =
                         FeedData().getDetail_mobileList(url: url_detail, completion: { (result) in
                             print("mobile result --->", result)
                             
-                            for mobile_detail_list in result {
-                                print("mobiledetail list id ", mobile_detail_list.url)
+                            //start for loop
+                            for mobile_detail_image in result {
+                                print("mobiledetail list id ", mobile_detail_image.url)
+                                self.mobile_image.append(mobile_detail_image.url)
                             }
+                             //end for loop
                         })
-                    
- 
                 }
                 
-                
-                
                 self.mDataArray += result
+               
                 
             }catch {
                 print("---error --->", error.localizedDescription)
             }
         }
     }
+//    End feed data
     
     
     
