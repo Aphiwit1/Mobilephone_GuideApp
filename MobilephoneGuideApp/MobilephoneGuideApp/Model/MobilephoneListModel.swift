@@ -17,12 +17,12 @@ struct PurpleMobilephoneListModel: Codable {
     let price: Double
     let brand, name, description: String
     
-   
+    let favSelected: Bool? = false
 }
 
 // MARK: Convenience initializers
 
-extension PurpleMobilephoneListModel {
+/*extension PurpleMobilephoneListModel {
     init?(data: Data) {
         guard let me = try? JSONDecoder().decode(PurpleMobilephoneListModel.self, from: data) else { return nil }
         self = me
@@ -74,4 +74,4 @@ extension Array where Element == MobilephoneListModel.Element {
         guard let data = self.jsonData else { return nil }
         return String(data: data, encoding: .utf8)
     }
-}
+}*/

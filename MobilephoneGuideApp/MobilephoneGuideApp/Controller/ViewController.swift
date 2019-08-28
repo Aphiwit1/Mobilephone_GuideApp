@@ -14,7 +14,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var mSorting: UIBarButtonItem!
   
-    var mDataArray: [PurpleMobilephoneListModel] = []
+    var mDataArray: [PurpleMobilephoneListModel] = [] {
+        didSet {
+            mTableView.reloadData()
+        }
+    }
+    
     @IBOutlet weak var  mTableView: UITableView!
     
     override func viewDidLoad() {
@@ -22,6 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         feedData()
     }
     
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mDataArray.count
@@ -36,10 +42,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell?.mMobileRating.text = "Rating: \(String(item.rating))"
         cell?.mImageView.loadImage(url: item.thumbImageURL)
         
+        print("fav Selected : --->", item.favSelected)
 
-        
         return cell!
     }
+    
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "cardDetailStoryboard") as? CardDetailViewController
+        let item = mDataArray[indexPath.row]
+        
+        
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }*/
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
+        let item = mDataArray[indexPath.row]
+        vc2?.title = item.name
+        
+        print("Hello")
+        
+        self.navigationController?.pushViewController(vc2!, animated: true)
+    }
+    
     
     
     
@@ -56,7 +81,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     print("item, --------------> ", item)
                 }
                self.mDataArray += result
-               self.mTableView.reloadData()
+//               self.mTableView.reloadData()
             }catch {
                 print("---error --->", error.localizedDescription)
             }
@@ -110,6 +135,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         print("clicked!")
     }
+    
+    
+   
     
    
     
