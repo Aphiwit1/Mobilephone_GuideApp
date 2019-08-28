@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
    
@@ -22,27 +24,37 @@ class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICo
     var mDataArray: [PurpleDetailMobileListModel] = []
     
     var vc2imageURLS : [String] = []
+    
     var vc2PriceLabel = ""
     var vc2RatingLabel = ""
     var vc2DecriptionLabel = ""
+    var vc2ID: Int!
+    
+    var imageArray: [String] = []
+    var number = Int()
+    
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-   
+
+        
     mCollectionView.delegate = self
     mCollectionView.dataSource = self
        mDetailPrice.text = vc2PriceLabel
        mDetailRating.text = vc2RatingLabel
        mDetailDescription.text = vc2DecriptionLabel
-        print("image : ", vc2imageURLS)
+//        print("image : ", vc2imageURLS)
         
+        getDetail_mobileList()
+       
+       
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vc2imageURLS.count
+        return imageArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -50,11 +62,69 @@ class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionView", for: indexPath) as? CardDetailCollectionViewCell
         
         
-        print("Hello")
-        cell?.mMobileCollectionView.loadImage(url: vc2imageURLS[indexPath.row])
+        cell?.mMobileCollectionView.loadImage(url: imageArray[indexPath.row])
    
         return cell!
     }
+    
+//    func feed_image(_ id:Int) {
+//        print(id)
+//        let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(id)/images"
+//        AF.request(baseUrl).response { (response) in
+//            print("----------> ", response)
+//            do {
+//                let decoder = JSONDecoder()
+//                let result = try decoder.decode([MobileJSONElement].self, from: response.data!)
+//
+//
+//            }catch {
+////                print("---error --->", error.localizedDescription)
+//            }
+//        }
+//    }
+    
+    
+    
+    func getDetail_mobileList() {
+        
+        self.number = self.vc2ID
+        print(self.number)
+        print("vc2 id", self.vc2ID)
+                let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(self.number)/images/"
+
+        AF.request(URL(string: baseUrl)!, method: .get ).responseJSON { response in
+            print(response)
+            switch response.result {
+            case let .success(value):
+                //                print("Value : ", value)
+                do {
+                    let decoder = JSONDecoder()
+                    //                    print("----->Detail Before<-----",response)
+                    let result = try decoder.decode([PurpleDetailMobileListModel].self, from: response.data!)
+                    
+                    
+                    for i in result {
+                        print(" i ", i.url)
+                       self.imageArray.append(i.url)
+                        
+                       
+                    }
+                   self.mCollectionView.reloadData()
+                    
+                } catch let error{
+                    print("error case success")
+                    print(error)
+                }
+                break
+            case let .failure(error):
+                print("error case failure")
+                print(error)
+                break
+            }
+        }
+    }
+    
+    
     
 
 

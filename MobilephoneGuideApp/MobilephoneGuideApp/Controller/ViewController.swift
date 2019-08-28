@@ -13,8 +13,9 @@ import AlamofireImage
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mSorting: UIBarButtonItem!
+    var id : Int?
     var mobile_image:[String] = []
-    
+    var mobile_image_id:[Any] = []
     var mDataArray: [PurpleMobilephoneListModel] = [] {
         didSet {
             mTableView.reloadData()
@@ -44,9 +45,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell?.mImageView.loadImage(url: item.thumbImageURL)
         
         print("fav Selected : --->", item.favSelected)
-        
-        
-        
         return cell!
     }
     
@@ -61,6 +59,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         vc2?.vc2DecriptionLabel = item.description
         vc2?.vc2PriceLabel = "Rating : \(String(item.price))"
         vc2?.vc2RatingLabel = "Price: \(String(item.rating))"
+        vc2?.vc2ID = item.id
+        
         
         vc2?.vc2imageURLS = mobile_image
         
@@ -86,6 +86,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 for items in result {
                     let url_detail = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(items.id)/images/"
                     print("url_detail--->", url_detail)
+                    
+                    
                     
                     var mobile_detail_image_list =
                         FeedData().getDetail_mobileList(url: url_detail, completion: { (result) in
