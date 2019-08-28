@@ -88,18 +88,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     print("url_detail--->", url_detail)
                     
                     
-                    
-                    var mobile_detail_image_list =
-                        FeedData().getDetail_mobileList(url: url_detail, completion: { (result) in
-                            print("mobile result --->", result)
-                            
-                            //start for loop
-                            for mobile_detail_image in result {
-                                print("mobiledetail list id ", mobile_detail_image.url)
-                                self.mobile_image.append(mobile_detail_image.url)
-                            }
-                             //end for loop
-                        })
+//                    var mobile_detail_image_list =
+//                        FeedData().getDetail_mobileList(url: url_detail, completion: { (result) in
+//                            print("mobile result --->", result)
+//
+//                            //start for loop
+//                            for mobile_detail_image in result {
+//                                print("mobiledetail list id ", mobile_detail_image.url)
+//                                self.mobile_image.append(mobile_detail_image.url)
+//                            }
+//                             //end for loop
+//                        })
                    
                 }
                 
