@@ -26,18 +26,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    var mDataArrayForFavorite : [PurpleMobilephoneListModel] = []
-    
+    var mDataArrayForAllSection : [PurpleMobilephoneListModel] = []
     @IBOutlet weak var  mTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
        feedData()
-        
-
     }
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mDataArray.count
@@ -56,13 +51,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let favSelected = cell?.mData.favSelected {
             cell?.mFavBtn.isSelected = favSelected
         }
-
         return cell!
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
         let item = mDataArray[indexPath.row]
         vc2?.title = item.name
@@ -71,25 +64,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         vc2?.vc2RatingLabel = "Price: \(String(item.rating))"
         vc2?.vc2ID = item.id
         vc2?.vc2imageURLS = mobile_image
-        
         self.navigationController?.pushViewController(vc2!, animated: true)
-        
-
     }
-    
-    /*func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as? TabAllTableViewCell
-        
-        
-        print("cell?.mData.favSelected--->", cell?.mData.favSelected)
-        
-        if cell?.mData.favSelected == true {
-            cell?.mData.favSelected = false
-        }else {
-             cell?.mData.favSelected = true
-        }
-    
-    }*/
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -97,82 +73,39 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? TabAllTableViewCell
-        
         if editingStyle == .delete {
             if cell?.mFavBtn.isSelected == true {
                 cell?.mData.favSelected = false
                 cell?.mFavBtn.isSelected = false
-                
                 filterFavoriteSection()
                 print("Hello")
-                
             }
-//            mTableView.reloadRows(at: [indexPath], with: .automatic)
-//            mTableView.reloadData()
-            
         }
-        
     }
    
-    
-    
 //    Start  feed data
     func feedData() {
         let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles"
         AF.request(baseUrl).response { (response) in
-            print("----------> ", response)
             do {
                 let decoder = JSONDecoder()
                 let result = try decoder.decode([PurpleMobilephoneListModel].self, from: response.data!)
-                print("Result ----> ", result)
-                
-                print("result data : ---> ", result)
-                
-                
-                
+
                 for items in result {
                     let url_detail = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(items.id)/images/"
-                    print("url_detail--->", url_detail)
-                    
-                    
-//                    var mobile_detail_image_list =
-//                        FeedData().getDetail_mobileList(url: url_detail, completion: { (result) in
-//                            print("mobile result --->", result)
-//
-//                            //start for loop
-//                            for mobile_detail_image in result {
-//                                print("mobiledetail list id ", mobile_detail_image.url)
-//                                self.mobile_image.append(mobile_detail_image.url)
-//                            }
-//                             //end for loop
-//                        })
-                   
                 }
-                
                 self.mDataArray += result
-                self.mDataArrayForFavorite = self.mDataArray
-    
-                 print("---mobile detail list id ", self.mobile_image)
-               
-                
+                self.mDataArrayForAllSection = self.mDataArray
             }catch {
-                print("---error --->", error.localizedDescription)
+            print("---error --->", error.localizedDescription)
             }
         }
     }
 //    End feed data
-    
-    
-    
-    
-    
-    @IBAction func chickToSort(sender: UIBarButtonItem) {
+    @IBAction func clickToSort(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Sorting", message: "", preferredStyle: .alert)
-        
-        //price low to hight
         alert.addAction(UIAlertAction(title: "Price low to hight", style: .default, handler: { _ in
             self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
-                //asc
                 first.price < second.price
             }
             self.mTableView.reloadData()
@@ -181,7 +114,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //price high to low
         alert.addAction(UIAlertAction(title: "Price hight to low", style: .default, handler: { _ in
             self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
-                //desc
                 first.price > second.price
             }
             self.mTableView.reloadData()
@@ -190,7 +122,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //rating low to hight
         alert.addAction(UIAlertAction(title: "Rating low to hight", style: .default, handler: { _ in
             self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
-                //desc
                 first.rating < second.rating
             }
             self.mTableView.reloadData()
@@ -199,24 +130,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //rating
         alert.addAction(UIAlertAction(title: "Rating hight to low", style: .default, handler: { _ in
             self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
-                //desc
                 first.rating > second.rating
             }
             self.mTableView.reloadData()
         }))
-        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         self.present(alert, animated: true, completion: nil)
-        
-        
-        
-        print("clicked!")
     }
     
     @IBAction func btnAll(sender: UIButton) {
-        print("btnAll")
-        mDataArray = mDataArrayForFavorite
+        mDataArray = mDataArrayForAllSection
     }
     
     @IBAction func btnFavortie(sender: UIButton) {
@@ -224,7 +147,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func filterFavoriteSection() {
-        let favourites = mDataArrayForFavorite.filter { $0.favSelected ?? false }
+        let favourites = mDataArrayForAllSection.filter { $0.favSelected ?? false }
         let names = favourites.map { $0.description }
         mDataArray = favourites
     }

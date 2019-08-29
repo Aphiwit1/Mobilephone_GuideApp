@@ -12,14 +12,11 @@ import AlamofireImage
 
 class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
    
-    
-    
     @IBOutlet weak var mDetailPrice: UILabel!
     @IBOutlet weak var mDetailRating: UILabel!
     @IBOutlet weak var mDetailDescription: UILabel!
     @IBOutlet weak var mCollectionView: UICollectionView!
     
-  
     
     var mDataArray: [PurpleDetailMobileListModel] = []
     
@@ -33,25 +30,17 @@ class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICo
     var imageArray: [String] = []
     var number = Int()
     
-    
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
     mCollectionView.delegate = self
     mCollectionView.dataSource = self
        mDetailPrice.text = vc2PriceLabel
        mDetailRating.text = vc2RatingLabel
        mDetailDescription.text = vc2DecriptionLabel
-//        print("image : ", vc2imageURLS)
         
         getDetail_mobileList()
-       
-       
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
@@ -67,23 +56,6 @@ class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell!
     }
     
-//    func feed_image(_ id:Int) {
-//        print(id)
-//        let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(id)/images"
-//        AF.request(baseUrl).response { (response) in
-//            print("----------> ", response)
-//            do {
-//                let decoder = JSONDecoder()
-//                let result = try decoder.decode([MobileJSONElement].self, from: response.data!)
-//
-//
-//            }catch {
-////                print("---error --->", error.localizedDescription)
-//            }
-//        }
-//    }
-    
-    
     
     func getDetail_mobileList() {
         
@@ -96,18 +68,13 @@ class CardDetailViewController: UIViewController, UICollectionViewDelegate, UICo
             print(response)
             switch response.result {
             case let .success(value):
-                //                print("Value : ", value)
                 do {
                     let decoder = JSONDecoder()
-                    //                    print("----->Detail Before<-----",response)
+
                     let result = try decoder.decode([PurpleDetailMobileListModel].self, from: response.data!)
-                    
-                    
                     for i in result {
                         print(" i ", i.url)
                        self.imageArray.append(i.url)
-                        
-                       
                     }
                    self.mCollectionView.reloadData()
                     
