@@ -92,6 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }*/
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+      
         return true
     }
 
@@ -101,10 +102,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if cell?.mFavBtn.isSelected == true {
                 cell?.mData.favSelected = false
                 cell?.mFavBtn.isSelected = false
+             
                 print(" cell?.mData.favSelected--->", cell?.mData.favSelected)
+                   mTableView.reloadData()
             }
            
         }
+            mTableView.reloadData()
+        
     }
    
     
@@ -222,7 +227,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let favourites = mDataArray.filter { $0.favSelected ?? false }
         print(favourites)
         mDataArray = favourites
-      
+      mTableView.reloadData()
         
         
     }
