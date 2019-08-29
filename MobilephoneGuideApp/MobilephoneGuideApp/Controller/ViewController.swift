@@ -46,13 +46,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tabAllCell") as? TabAllTableViewCell
         let item = mDataArray[indexPath.row]
+        cell?.mData = item
         cell?.mMobileName.text = item.name
         cell?.mMobilePrice.text = "Price: $\(String(item.price))"
         cell?.mMobileDescription.text = item.description
         cell?.mMobileRating.text = "Rating: \(String(item.rating))"
         cell?.mImageView.loadImage(url: item.thumbImageURL)
-        cell?.mData = item
         
+        if let favSelected = cell?.mData.favSelected {
+            cell?.mFavBtn.isSelected = favSelected
+        }
 
         return cell!
     }
@@ -99,10 +102,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if cell?.mFavBtn.isSelected == true {
                 cell?.mData.favSelected = false
                 cell?.mFavBtn.isSelected = false
+                
                 filterFavoriteSection()
+                print("Hello")
                 
             }
+//            mTableView.reloadRows(at: [indexPath], with: .automatic)
+//            mTableView.reloadData()
+            
         }
+        
     }
    
     
@@ -207,9 +216,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func btnAll(sender: UIButton) {
         print("btnAll")
-        
         mDataArray = mDataArrayForFavorite
-       
     }
     
     @IBAction func btnFavortie(sender: UIButton) {
@@ -217,24 +224,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func filterFavoriteSection() {
-        let favourites = mDataArray.filter { $0.favSelected ?? false }
-        print(favourites)
+        let favourites = mDataArrayForFavorite.filter { $0.favSelected ?? false }
+        let names = favourites.map { $0.description }
         mDataArray = favourites
-        mTableView.reloadData()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 }
 

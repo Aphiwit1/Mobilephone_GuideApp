@@ -38,14 +38,15 @@ class TabAllTableViewCell: UITableViewCell {
     }
     
     @IBAction func chackFavButtonPressed(sender: UIButton) {
+        print(mData.brand)
         mFavBtn.isSelected = !sender.isSelected
         if mFavBtn.isSelected == true {
             mData.favSelected = true
-            print(mData.favSelected)
         }else if mFavBtn.isSelected == false {
             mData.favSelected = false
         }
-        
+        print(mData.favSelected!)
+        print(mFavBtn.isSelected)
     }
 
 }
