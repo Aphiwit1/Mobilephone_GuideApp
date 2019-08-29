@@ -77,13 +77,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     }
     
+    /*func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? TabAllTableViewCell
+        
+        
+        print("cell?.mData.favSelected--->", cell?.mData.favSelected)
+        
+        if cell?.mData.favSelected == true {
+            cell?.mData.favSelected = false
+        }else {
+             cell?.mData.favSelected = true
+        }
+    
+    }*/
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? TabAllTableViewCell
         if editingStyle == .delete {
+            if cell?.mFavBtn.isSelected == true {
+                cell?.mData.favSelected = false
+                cell?.mFavBtn.isSelected = false
+                print(" cell?.mData.favSelected--->", cell?.mData.favSelected)
+            }
            
-            
         }
     }
+   
     
+  
     
     
 //    Start  feed data
@@ -197,6 +222,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let favourites = mDataArray.filter { $0.favSelected ?? false }
         print(favourites)
         mDataArray = favourites
+      
         
         
     }
