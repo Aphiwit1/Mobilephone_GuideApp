@@ -34,9 +34,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
        feedData()
         
-        
-     
-        
 
     }
     
@@ -92,28 +89,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }*/
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-      
         return true
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? TabAllTableViewCell
+        
         if editingStyle == .delete {
             if cell?.mFavBtn.isSelected == true {
                 cell?.mData.favSelected = false
                 cell?.mFavBtn.isSelected = false
-             
-                print(" cell?.mData.favSelected--->", cell?.mData.favSelected)
-                   mTableView.reloadData()
+                filterFavoriteSection()
+                
             }
-           
         }
-            mTableView.reloadData()
-        
     }
    
-    
-  
     
     
 //    Start  feed data
@@ -222,14 +213,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func btnFavortie(sender: UIButton) {
-        print("btnFav")
+        filterFavoriteSection()
+    }
     
+    func filterFavoriteSection() {
         let favourites = mDataArray.filter { $0.favSelected ?? false }
         print(favourites)
         mDataArray = favourites
-      mTableView.reloadData()
-        
-        
+        mTableView.reloadData()
     }
     
     
