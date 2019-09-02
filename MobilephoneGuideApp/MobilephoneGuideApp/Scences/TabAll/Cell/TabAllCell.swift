@@ -11,6 +11,12 @@ import UIKit
 class TabAllCell: UITableViewCell {
     
     @IBOutlet weak var mobilename: UILabel!
+    @IBOutlet weak var mobileDescription: UILabel!
+    @IBOutlet weak var mobilePrice: UILabel!
+    @IBOutlet weak var mobileRating: UILabel!
+    @IBOutlet weak var mobileFavBtn: UIButton!
+    
+    @IBOutlet weak var mobileImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

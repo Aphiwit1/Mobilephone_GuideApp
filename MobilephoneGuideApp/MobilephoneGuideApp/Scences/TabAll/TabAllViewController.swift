@@ -59,6 +59,11 @@ class TabAllViewController: UIViewController, TabAllViewControllerInterface, UIT
         let cell = tableView.dequeueReusableCell(withIdentifier: "tabAllCell") as? TabAllCell
         let item = mobileList[indexPath.row]
         cell?.mobilename.text = item.mobilename
+        cell?.mobileDescription.text = item.mobileDescription
+        cell?.mobilePrice.text = item.mobilePrice
+        cell?.mobileRating.text = item.mobileRating
+        cell?.mobileImage.loadImage(url: item.mobileImage)
+        
         return cell!
     }
     

@@ -39,6 +39,7 @@ struct TabAll {
                 let mobileRating : String
                 let mobilePrice  : String
                 let mobileDescription  : String
+                let mobileImage: String
             }
         }
     }

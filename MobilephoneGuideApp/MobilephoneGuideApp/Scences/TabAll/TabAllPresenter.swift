@@ -39,7 +39,8 @@ class TabAllPresenter: TabAllPresenterInterface {
                 mobilename: $0.name,
                 mobileRating: "Rating: $\(String($0.rating))",
                 mobilePrice: "Price: $\(String($0.price))",
-                mobileDescription: $0.description
+                mobileDescription: $0.description,
+                mobileImage: $0.thumbImageURL
             )
         }
         let mobileViewModel = TabAll.FeedDataTable.ViewModel(
