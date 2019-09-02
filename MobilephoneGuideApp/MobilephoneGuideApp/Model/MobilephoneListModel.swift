@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias MobilephoneListModel = [PurpleMobilephoneListModel]
+typealias MobilephoneListModel = [MobileList]
 
-class  PurpleMobilephoneListModel: Codable {
+class  MobileList: Codable {
     let rating: Double
     let id: Int
     let thumbImageURL: String

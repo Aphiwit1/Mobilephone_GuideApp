@@ -10,7 +10,7 @@ import UIKit
 
 class TabAllTableViewCell: UITableViewCell {
     
-    var mData: PurpleMobilephoneListModel!
+    var mData: MobileList!
     @IBOutlet weak var mImageView: UIImageView!
     
 

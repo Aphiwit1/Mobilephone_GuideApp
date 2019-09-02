@@ -13,25 +13,25 @@ import AlamofireImage
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mSorting: UIBarButtonItem!
-    
     @IBOutlet weak var mAllBtn: UIButton!
     @IBOutlet weak var mFavoriteBtn: UIButton!
-    
+
+    let feedInfo = FeedData()
     var id : Int?
     var mobile_image:[String] = []
     var mobile_image_id:[Any] = []
-    var mDataArray: [PurpleMobilephoneListModel] = [] {
+    var mDataArray: [MobileList] = [] {
         didSet {
             mTableView.reloadData()
         }
     }
     
-    var mDataArrayForAllSection : [PurpleMobilephoneListModel] = []
+    var mDataArrayForAllSection : [MobileList] = []
     @IBOutlet weak var  mTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       feedData()
+        feedData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,7 +54,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell!
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc2 = storyboard?.instantiateViewController(withIdentifier: "cardDetailStorybaord") as? CardDetailViewController
         let item = mDataArray[indexPath.row]
@@ -70,7 +69,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? TabAllTableViewCell
         if editingStyle == .delete {
@@ -82,57 +80,41 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
-   
-//    Start  feed data
     func feedData() {
-        let baseUrl = "https://scb-test-mobile.herokuapp.com/api/mobiles"
-        AF.request(baseUrl).response { (response) in
-            do {
-                let decoder = JSONDecoder()
-                let result = try decoder.decode([PurpleMobilephoneListModel].self, from: response.data!)
-
-                for items in result {
-                    let url_detail = "https://scb-test-mobile.herokuapp.com/api/mobiles/\(items.id)/images/"
-                }
-                self.mDataArray += result
-                self.mDataArrayForAllSection = self.mDataArray
-            }catch {
-            print("---error --->", error.localizedDescription)
-            }
+        feedInfo.feedContent { (result) in
+            self.mDataArray = result
         }
     }
-//    End feed data
+    
+
     @IBAction func clickToSort(sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Sorting", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Price low to hight", style: .default, handler: { _ in
-            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+            self.mDataArray.sort { (first: MobileList, second: MobileList) -> Bool in
                 first.price < second.price
             }
-            self.mTableView.reloadData()
         }))
         
         //price high to low
         alert.addAction(UIAlertAction(title: "Price hight to low", style: .default, handler: { _ in
-            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+            self.mDataArray.sort { (first: MobileList, second: MobileList) -> Bool in
                 first.price > second.price
             }
-            self.mTableView.reloadData()
         }))
         
         //rating low to hight
         alert.addAction(UIAlertAction(title: "Rating low to hight", style: .default, handler: { _ in
-            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+            self.mDataArray.sort { (first: MobileList, second: MobileList) -> Bool in
                 first.rating < second.rating
             }
-            self.mTableView.reloadData()
         }))
         
         //rating
         alert.addAction(UIAlertAction(title: "Rating hight to low", style: .default, handler: { _ in
-            self.mDataArray.sort { (first: PurpleMobilephoneListModel, second: PurpleMobilephoneListModel) -> Bool in
+            self.mDataArray.sort { (first: MobileList, second: MobileList) -> Bool in
                 first.rating > second.rating
             }
-            self.mTableView.reloadData()
+
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
